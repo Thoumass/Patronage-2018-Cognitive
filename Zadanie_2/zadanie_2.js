@@ -1,20 +1,28 @@
+'use strict';
+
+const request = require("request");
+const url = "http://numbersapi.com/";
+
 function getResponse(number) {
+		const options = {
+	        url: 'http://numbersapi.com/'+number,
+	        headers: {
+	            'User-Agent': 'request'
+	        }
+        };
+
 	return new Promise ((resolve, reject) => {
-		const request = new XMLHttpRequest();
-		request.open("GET", 'http://numbersapi.com/'+ number);
-		request.onload = (result) => {
-			if (result.target.status === 200) {
-				resolve(result.target.response);
-			}
-			if (result.target.status === 404) {
-				reject(result.target.response);
-			}
-		};
-		request.onerror = (error) => {
-			onError(error);
-		};
-		request.send();
-	});
+
+        request.get(options, function(err, resp, body) {
+            if (err) {
+            	onError(err);
+                reject(err);
+            } else {
+            	console.log(body);
+                resolve(body);
+            }
+        });
+    });
 }
 
 function onError(error) {
@@ -29,5 +37,5 @@ function onPromiseRejected(arg) {
 	console.log('onPromiseRejected()', arg);
 }
 
-const numberPromise = getResponse(22);
+const numberPromise = getResponse(6565766447);
 numberPromise.then(onPromiseResolved, onPromiseRejected);
