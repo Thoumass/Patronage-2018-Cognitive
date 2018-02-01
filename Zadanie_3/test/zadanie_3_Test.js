@@ -1,7 +1,7 @@
-var hello = require(['./../zadanie_3.js']);
-
 describe('hello', function() {
-	it('gets hello', function() {
-		expect(hello()).toBe('hello');
+	it('the number is', function() {
+		console.log(getResponse);
+		expect(getResponse()).not.toEqual('1 is the number of moons orbiting Earth.');
 	})
-})
+});
+
