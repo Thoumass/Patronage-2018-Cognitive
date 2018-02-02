@@ -1,6 +1,8 @@
 
 'use strict';
 
+const request = require("request");
+const url = "http://numbersapi.com/";
 
 function getResponse(number) {
         const options = {
@@ -12,7 +14,7 @@ function getResponse(number) {
 
     return new Promise ((resolve, reject) => {
 
-        get(options, function(err, resp, body) {
+        request.get(options, function(err, resp, body) {
             if (err) {
                 onError(err);
                 reject(err);
